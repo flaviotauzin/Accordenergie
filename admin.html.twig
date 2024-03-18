@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block menu %}
+<nav>
+<!-- Mettez ici les liens spécifiques pour les administrateurs -->
+<div class="sidebar-section">
+    <div class="sidebar-title">Administration</div>
+    <!-- Ajoutez les liens spécifiques pour les administrateurs ici -->
+    <!-- Par exemple -->
+    <a href="emails.php">Emails</a>
+<a href="rendez_vous.php">Rendez-vous</a>
+    <a href="users.php">Gestion des utilisateurs</a>
+    <a href="parametres_systeme.php">Paramètres système</a>
+</div>
+</nav>
+{% endblock %}

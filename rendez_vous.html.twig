@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accord Energie | {% block title %}{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <!-- ... Vos autres liens CSS ... -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+    font-family: 'Raleway', sans-serif;
+    height: 100vh;
+            background-image: linear-gradient(to right top, #ff5f6d, #ffc371);
+}
+
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            padding: 10px 20px;
+        }
+
+        .company-name {
+            font-size: 24px;
+            color: white;
+        }
+
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom-color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            border-bottom-color: white;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        .topbar {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center; /* Centre les éléments de la barre supérieure */
+            align-items: center;
+        }
+
+        .company-name {
+            display: flex;
+            align-items: center; /* Centre le texte et le logo verticalement */
+            gap: 10px; /* Espacement entre le logo et le nom */
+        }
+
+        .company-name img {
+            height: 50px; /* Taille du logo */
+        }
+
+        /* ... */
+
+        .openbtn {
+            font-size: 30px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            position: absolute;
+            left: 20px; /* Positionner le bouton à gauche */
+            top: 20px; /* Positionner le bouton en haut */
+        }
+
+        .sidebar {
+            height: 100vh;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            z-index: 1000; /* Assure que la barre latérale est au-dessus du contenu principal */
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #444;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        .sidebar-section {
+    margin-top: 5px; /* Add space between sections */
+}
+
+.sidebar-title {
+    padding: 20px 20px;
+    font-size: 22px;
+    color: white;
+    background-color: #490; /* Color for the section title */
+}
+
+.sidebar-title {
+    padding: 10px 20px;
+    font-size: 22px;
+    color: white;
+    background-color: #490; /* Dark grey background for titles */
+    margin-top: 10px; /* Space between section titles */
+}
+
+/* Adjust the margin-top for the first title to reduce space at the top */
+.sidebar-section:first-child .sidebar-title {
+    margin-top: 0;
+}
+
+        /* ... */
+    </style>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Récupérer le bouton et le calendrier
+            var btn = document.querySelector('button[type="submit"]');
+            var calendarEl = document.getElementById('calendar');
+
+            // Écouter l'événement click sur le bouton
+            btn.addEventListener('click', function() {
+                // Obtenir la date et l'heure du rendez-vous (pour l'exemple, on utilise la date actuelle)
+                var date = new Date();
+                var year = date.getFullYear();
+                var month = date.getMonth() + 1; // Les mois vont de 0 à 11, donc on ajoute 1
+                var day = date.getDate();
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+
+                // Construire la chaîne de date dans le format ISO 8601 (YYYY-MM-DDTHH:MM:SS)
+                var isoDate = year + '-' + month.toString().padStart(2, '0') + '-' + day.toString().padStart(2, '0') + 'T' + hour.toString().padStart(2, '0') + ':' + minute.toString().padStart(2, '0') + ':00';
+
+                // Ajouter l'événement au calendrier
+                calendar.addEvent({
+                    title: 'Rendez-vous',
+                    start: isoDate
+                });
+            });
+        });
+    </script>
+</head>
+
+
+<body>
+    <!-- Bouton pour ouvrir la barre latérale -->
+    <div class="openbtn" onclick="openNav()">☰</div>
+
+    <!-- Barre latérale -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <!-- Vos liens de barre latérale ici -->
+       
+       <div class="sidebar-section">
+        <div class="sidebar-title">CRM</div>
+        <a href="comptes.php">Comptes</a>
+        <a href="contacts.php">Contacts</a>
+        <a href="prospects.php">Prospects</a>
+        <a href="opportunites.php">Opportunités</a>
+    </div>
+
+        <div class="sidebar-section">
+        <div class="sidebar-title">Activités</div>
+        <a href="emails.php">Emails</a>
+        <a href="rendez_vous.php">Rendez-vous</a>
+        <a href="appels.php">Appels</a>
+        <a href="taches.php">Tâches</a>
+        <a href="calendrier.php">Calendrier</a>
+    </div>
+
+    <div class="sidebar-section">
+        <div class="sidebar-title">Support</div>
+        <a href="tickets.php">Tickets</a>
+        <a href="base_de_connaissance.php">Base de connaissance</a>
+    </div>
+
+    </div>
+
+    <!-- Barre supérieure -->
+    <div class="topbar">
+        <div class="company-name">
+            <img src="style/logo.png" alt="Logo" />
+            Accordenergie
+        </div>
+    </div>
+
+   <!-- Contenu principal -->
+<div class="main">
+    {% block body %}
+        <div class="appointment-form">
+            <h2>Prendre un rendez-vous</h2>
+            <form action="submit_appointment.php" method="post">
+                <div class="form-group">
+                    <label for="name">Nom :</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Téléphone :</label>
+                    <input type="text" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date du rendez-vous :</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Heure du rendez-vous :</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message :</label>
+                    <textarea id="message" name="message" rows="4"></textarea>
+                </div>
+                <button type="submit">Prendre rendez-vous</button>
+            </form>
+        </div>
+    {% endblock %}
+</div>
+
+
+
+    <!-- Le calendrier où les rendez-vous seront affichés -->
+    <div id="calendar"></div>
+
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
